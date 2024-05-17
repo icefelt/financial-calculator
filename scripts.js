@@ -1,24 +1,23 @@
-# scripts.js
 function calculate() {
-    const paymentsPerYear = parseFloat(document.getElementById('paymentsPerYear').value);
-    const loanAmount = parseFloat(document.getElementById('loanAmount').value);
-    const periodicPayment = parseFloat(document.getElementById('periodicPayment').value);
-    const annualInterestRate = parseFloat(document.getElementById('annualInterestRate').value);
-    const numberOfPayments = parseFloat(document.getElementById('numberOfPayments').value);
+    const paymentsPerYear = parseFloat(document.getElementById('paymentsPerYear').value) || NaN;
+    const loanAmount = parseFloat(document.getElementById('loanAmount').value) || NaN;
+    const periodicPayment = parseFloat(document.getElementById('periodicPayment').value) || NaN;
+    const annualInterestRate = parseFloat(document.getElementById('annualInterestRate').value) || NaN;
+    const numberOfPayments = parseFloat(document.getElementById('numberOfPayments').value) || NaN;
 
     let missingField;
     let result;
 
-    if (!loanAmount) {
+    if (isNaN(loanAmount)) {
         missingField = 'loanAmount';
         result = calculateLoanAmount(paymentsPerYear, periodicPayment, annualInterestRate, numberOfPayments);
-    } else if (!periodicPayment) {
+    } else if (isNaN(periodicPayment)) {
         missingField = 'periodicPayment';
         result = calculatePeriodicPayment(paymentsPerYear, loanAmount, annualInterestRate, numberOfPayments);
-    } else if (!annualInterestRate) {
+    } else if (isNaN(annualInterestRate)) {
         missingField = 'annualInterestRate';
         result = calculateAnnualInterestRate(paymentsPerYear, loanAmount, periodicPayment, numberOfPayments);
-    } else if (!numberOfPayments) {
+    } else if (isNaN(numberOfPayments)) {
         missingField = 'numberOfPayments';
         result = calculateNumberOfPayments(paymentsPerYear, loanAmount, periodicPayment, annualInterestRate);
     } else {
@@ -26,7 +25,12 @@ function calculate() {
         return;
     }
 
-    document.getElementById('result').innerHTML = `Calculated ${missingField}: ${result.toFixed(2)}`;
+    if (isNaN(result)) {
+        document.getElementById('result').innerHTML = "Calculation error. Please check your inputs.";
+    } else {
+        document.getElementById('result').innerHTML = `Calculated ${missingField}: ${result.toFixed(2)}`;
+        document.getElementById(missingField).value = result.toFixed(2);
+    }
 }
 
 function calculateLoanAmount(paymentsPerYear, periodicPayment, annualInterestRate, numberOfPayments) {
