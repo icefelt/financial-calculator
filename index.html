@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Financial Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="calculator">
+        <h1>Financial Calculator</h1>
+        <form id="calculatorForm">
+            <label for="paymentsPerYear">Payments Per Year:</label>
+            <input type="number" id="paymentsPerYear" name="paymentsPerYear" required>
+
+            <label for="loanAmount">Loan Amount:</label>
+            <input type="number" id="loanAmount" name="loanAmount">
+
+            <label for="periodicPayment">Periodic Payment:</label>
+            <input type="number" id="periodicPayment" name="periodicPayment">
+
+            <label for="annualInterestRate">Annual Interest Rate (%):</label>
+            <input type="number" id="annualInterestRate" name="annualInterestRate">
+
+            <label for="numberOfPayments">Number of Payments:</label>
+            <input type="number" id="numberOfPayments" name="numberOfPayments">
+
+            <button type="button" onclick="calculate()">Calculate</button>
+        </form>
+        <div id="result"></div>
+    </div>
+    <script src="scripts.js"></script>
+</body>
+</html>
